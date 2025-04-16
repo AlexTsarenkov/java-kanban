@@ -1,9 +1,11 @@
+package Model;
+
 public class SubTask extends Task {
     private int epicTaskId;
 
     @Override
     public String toString() {
-        return "SubTask{" +
+        return "Model.SubTask{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
@@ -18,11 +20,12 @@ public class SubTask extends Task {
         taskType = TaskType.SUB_TASK;
     }
 
-    public SubTask(Task task, int epicTaskId) {
-        super(task.name, task.description, task.id);
-        this.epicTaskId = epicTaskId;
+    public SubTask(SubTask subTask) {
+        super(subTask.name, subTask.description, subTask.id);
+        this.epicTaskId = subTask.epicTaskId;
         taskType = TaskType.SUB_TASK;
     }
+
 
     public Integer getEpicTaskId() {
         return epicTaskId;
