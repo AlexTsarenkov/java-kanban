@@ -1,4 +1,4 @@
-import Controller.TaskManager;
+import Controller.*;
 import Model.*;
 
 import java.util.ArrayList;
@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        Managers manager = new Managers();
+        HistoryManager historyManager = manager.getDefaultHistoryManager();
+        TaskManager taskManager = manager.getTaskManagerUsingHistoryManager(historyManager);
 
         System.out.println("Test 1: Create 4 tasks");
         int taskId1 = taskManager.addNewTask(new Task("Task1", "Task 1 for test", 0));
@@ -44,6 +46,34 @@ public class Main {
         taskManager.removeAll();
         printTasks(taskManager);
 
+        System.out.println("Test 8: Removing all tasks");
+        taskManager.removeAll();
+        printTasks(taskManager);
+
+        System.out.println("Test 9: History manager test");
+        taskId1 = taskManager.addNewTask(new Task("Task1", "Task 1 for test", 0));
+        taskId2 = taskManager.addNewTask(new Task("Task2", "Task 2 for test", 0));
+        taskId3 = taskManager.addNewTask(new Task("Task3", "Task 3 for test", 0));
+        taskId4 = taskManager.addNewTask(new Task("Task4", "Task 4 for test", 0));
+
+        taskManager.taskAddSubTask(taskId3, taskId4);
+
+        taskManager.getTaskById(taskId1); //1
+        taskManager.getTaskById(taskId2); //2
+        taskManager.getTaskById(taskId3); //3
+        taskManager.getTaskById(taskId4); //4
+        taskManager.getTaskById(taskId2); //5
+        taskManager.getTaskById(taskId2); //6
+        taskManager.getTaskById(taskId1); //7
+        taskManager.getTaskById(taskId1); //8
+        taskManager.getTaskById(taskId2); //9
+        taskManager.getTaskById(taskId1); //10
+        taskManager.getTaskById(taskId2); //11
+        taskManager.getTaskById(taskId3); //12
+
+        for(Task task : historyManager.getHistory()){
+            System.out.print(task.getId() + " ");
+        }
     }
 
     public static void printTasks(TaskManager taskManager) {
