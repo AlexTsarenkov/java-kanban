@@ -1,15 +1,15 @@
 package Controller;
 
 public class Managers {
-    public TaskManager getDefaultTaskManager() {
+    public static TaskManager getDefaultTaskManager() {
         return new InMemoryTaskManager();
     }
 
-    public TaskManager getTaskManagerUsingHistoryManager(HistoryManager historyManager) {
+    public static TaskManager getTaskManagerUsingHistoryManager(HistoryManager historyManager) {
         return new InMemoryTaskManager(historyManager);
     }
 
-    public HistoryManager getDefaultHistoryManager() {
+    public static HistoryManager getDefaultHistoryManager() {
         return new InMemoryHistoryManager();
     }
 }

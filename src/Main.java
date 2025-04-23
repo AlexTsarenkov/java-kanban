@@ -6,9 +6,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        Managers manager = new Managers();
-        HistoryManager historyManager = manager.getDefaultHistoryManager();
-        TaskManager taskManager = manager.getTaskManagerUsingHistoryManager(historyManager);
+        HistoryManager historyManager = Managers.getDefaultHistoryManager();
+        TaskManager taskManager = Managers.getTaskManagerUsingHistoryManager(historyManager);
 
         System.out.println("Test 1: Create 4 tasks");
         int taskId1 = taskManager.addNewTask(new Task("Task1", "Task 1 for test", 0));
