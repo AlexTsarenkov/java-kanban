@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public interface TaskManager {
     int addNewTask(Task task);
 
+    Task getAnyTaskById(int id);
+
     Task getTaskById(int id);
 
     EpicTask getEpicTaskById(int id);

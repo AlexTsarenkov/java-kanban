@@ -1,27 +1,33 @@
 package Controller;
-import Model.Task;
 
+import Model.HistoryList;
+import Model.Task;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final List<Task> history;
+    private final HistoryList history;
 
     public InMemoryHistoryManager() {
-        this.history = new ArrayList<>();
+        this.history = new HistoryList();
     }
 
     @Override
     public void add(Task task) {
-        if (history.size() == 10) {
-            history.remove(0);
-        }
-        history.add(task);
+        history.linkLast(task);
     }
 
     @Override
-    public  List<Task> getHistory(){
-        return new ArrayList<>(history);
+    public ArrayList<Task> getHistory() {
+        return history.getTasks();
+    }
+
+    @Override
+    public void remove(int id) {
+        history.remove(id);
+    }
+
+    @Override
+    public void removeAll() {
+        history.clear();
     }
 }
