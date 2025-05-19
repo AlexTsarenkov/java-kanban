@@ -33,23 +33,25 @@ public class HistoryList {
     }
 
     public void remove(int id) {
-        Node nodeToRemove = history.get(id);
+        if (history.containsKey(id)) {
+            Node nodeToRemove = history.get(id);
 
-        if (nodeToRemove != null) {
-            history.remove(id);
-            Node prevNode = nodeToRemove.getPreviousNode();
-            Node nextNode = nodeToRemove.getNextNode();
+            if (nodeToRemove != null) {
+                history.remove(id);
+                Node prevNode = nodeToRemove.getPreviousNode();
+                Node nextNode = nodeToRemove.getNextNode();
 
-            if (prevNode != null) {
-                prevNode.setNextNode(nextNode);
-            }
+                if (prevNode != null) {
+                    prevNode.setNextNode(nextNode);
+                }
 
-            if (nextNode != null) {
-                nextNode.setPreviousNode(prevNode);
-            }
+                if (nextNode != null) {
+                    nextNode.setPreviousNode(prevNode);
+                }
 
-            if (lastNode.equals(nodeToRemove)) {
-                lastNode = nodeToRemove.getPreviousNode();
+                if (lastNode.equals(nodeToRemove)) {
+                    lastNode = nodeToRemove.getPreviousNode();
+                }
             }
         }
     }
