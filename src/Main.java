@@ -1,5 +1,10 @@
-import Controller.*;
-import Model.*;
+import ru.yandex.controller.HistoryManager;
+import ru.yandex.controller.Managers;
+import ru.yandex.controller.TaskManager;
+import ru.yandex.model.EpicTask;
+import ru.yandex.model.SubTask;
+import ru.yandex.model.Task;
+import ru.yandex.model.TaskStatus;
 
 import java.util.ArrayList;
 

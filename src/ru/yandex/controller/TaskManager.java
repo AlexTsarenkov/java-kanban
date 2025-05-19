@@ -1,9 +1,9 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.EpicTask;
-import Model.SubTask;
-import Model.Task;
-import Model.TaskType;
+import ru.yandex.model.EpicTask;
+import ru.yandex.model.SubTask;
+import ru.yandex.model.Task;
+import ru.yandex.model.TaskType;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.Objects;
+package ru.yandex.model;
 
 public class Node {
     private Node previousNode;

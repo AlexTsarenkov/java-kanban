@@ -1,8 +1,8 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.EpicTask;
-import Model.SubTask;
-import Model.Task;
+import ru.yandex.model.EpicTask;
+import ru.yandex.model.SubTask;
+import ru.yandex.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,9 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.Task;
+import ru.yandex.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager historyManager;

@@ -1,6 +1,6 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.*;
+import ru.yandex.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

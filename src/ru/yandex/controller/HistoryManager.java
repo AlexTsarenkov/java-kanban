@@ -1,6 +1,6 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.Task;
+import ru.yandex.model.Task;
 
 import java.util.List;
 

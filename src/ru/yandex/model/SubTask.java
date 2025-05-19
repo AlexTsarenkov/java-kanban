@@ -1,4 +1,4 @@
-package Model;
+package ru.yandex.model;
 
 public class SubTask extends Task {
     private int epicTaskId;

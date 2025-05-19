@@ -1,7 +1,7 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.HistoryList;
-import Model.Task;
+import ru.yandex.model.HistoryList;
+import ru.yandex.model.Task;
 import java.util.ArrayList;
 
 public class InMemoryHistoryManager implements HistoryManager {
