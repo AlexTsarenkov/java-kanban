@@ -22,8 +22,8 @@ public class Node {
     public String toString() {
         return "Node{" +
                 "task='" + task + '\'' +
-                ", prevNode='" + ( previousNode != null ? previousNode.getTask() : null ) + '\'' +
-                ", nextNode=" + ( nextNode != null ? nextNode.getTask() : null ) +
+                ", prevNode='" + (previousNode != null ? previousNode.getTask() : null) + '\'' +
+                ", nextNode=" + (nextNode != null ? nextNode.getTask() : null) +
                 '}';
     }
 

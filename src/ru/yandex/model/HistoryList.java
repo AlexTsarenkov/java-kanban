@@ -9,7 +9,7 @@ public class HistoryList {
     private final Map<Integer, Node> history;
     private Node lastNode;
 
-    public Node getLastNode(){
+    public Node getLastNode() {
         return lastNode;
     }
 
@@ -66,7 +66,7 @@ public class HistoryList {
         return tasks;
     }
 
-    public void clear(){
+    public void clear() {
         for (Node node : history.values()) {
             node.setPreviousNode(null);
             node.setNextNode(null);
