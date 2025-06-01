@@ -1,11 +1,9 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.Task;
+import ru.yandex.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager historyManager;
@@ -33,14 +31,18 @@ class InMemoryHistoryManagerTest {
     void taskNameIsUnchangedAfterAddingToHistory() {
         Task task1 = new Task("Test task 1", "Task 1 description", 123);
         historyManager.add(task1);
-        Assertions.assertTrue(task1.getName().equals(historyManager.getHistory().getFirst().getName()));
+        Assertions.assertTrue(task1.getName().equals(
+                historyManager.getHistory().getFirst().getName())
+        );
     }
 
     @Test
     void taskDescriptionIsUnchangedAfterAddingToHistory() {
         Task task1 = new Task("Test task 1", "Task 1 description", 123);
         historyManager.add(task1);
-        Assertions.assertTrue(task1.getDescription().equals(historyManager.getHistory().getFirst().getDescription()));
+        Assertions.assertTrue(task1.getDescription().equals(
+                historyManager.getHistory().getFirst().getDescription())
+        );
     }
 
     @Test
@@ -67,8 +69,8 @@ class InMemoryHistoryManagerTest {
         taskManager.getTaskById(taskId2); //11
         taskManager.getEpicTaskById(taskId3); //12
 
-        Integer[] expectedIds = {3, 4, 2, 2, 1, 1, 2, 1, 2, 3};
-        Integer[] result = new Integer[10];
+        Integer[] expectedIds = {4,1,2,3};
+        Integer[] result = new Integer[4];
 
         int i = 0;
         for(Task task: historyManager.getHistory()) {
@@ -77,6 +79,5 @@ class InMemoryHistoryManagerTest {
         }
 
         Assertions.assertArrayEquals(expectedIds, result);
-
     }
 }

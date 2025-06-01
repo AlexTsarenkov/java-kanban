@@ -1,4 +1,4 @@
-package Controller;
+package ru.yandex.controller;
 
 public class Managers {
     public static TaskManager getDefaultTaskManager() {

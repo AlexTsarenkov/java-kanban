@@ -1,5 +1,10 @@
-import Controller.*;
-import Model.*;
+import ru.yandex.controller.HistoryManager;
+import ru.yandex.controller.Managers;
+import ru.yandex.controller.TaskManager;
+import ru.yandex.model.EpicTask;
+import ru.yandex.model.SubTask;
+import ru.yandex.model.Task;
+import ru.yandex.model.TaskStatus;
 
 import java.util.ArrayList;
 
@@ -50,28 +55,30 @@ public class Main {
         printTasks(taskManager);
 
         System.out.println("Test 9: History manager test");
+        System.out.println(historyManager.getHistory());
+
         taskId1 = taskManager.addNewTask(new Task("Task1", "Task 1 for test", 0));
         taskId2 = taskManager.addNewTask(new Task("Task2", "Task 2 for test", 0));
         taskId3 = taskManager.addNewTask(new Task("Task3", "Task 3 for test", 0));
         taskId4 = taskManager.addNewTask(new Task("Task4", "Task 4 for test", 0));
 
         taskManager.taskAddSubTask(taskId3, taskId4);
+        printTasks(taskManager);
+        taskManager.getAnyTaskById(taskId1); //1
+        taskManager.getAnyTaskById(taskId2); //2
+        taskManager.getAnyTaskById(taskId3); //3
+        taskManager.getAnyTaskById(taskId4); //4
+        taskManager.getAnyTaskById(taskId2); //5
+        taskManager.getAnyTaskById(taskId2); //6
+        taskManager.getAnyTaskById(taskId1); //7
+        taskManager.getAnyTaskById(taskId1); //8
+        taskManager.getAnyTaskById(taskId2); //9
+        taskManager.getAnyTaskById(taskId1); //10
+        taskManager.getAnyTaskById(taskId2); //11
+        taskManager.getAnyTaskById(taskId3); //12
 
-        taskManager.getTaskById(taskId1); //1
-        taskManager.getTaskById(taskId2); //2
-        taskManager.getTaskById(taskId3); //3
-        taskManager.getTaskById(taskId4); //4
-        taskManager.getTaskById(taskId2); //5
-        taskManager.getTaskById(taskId2); //6
-        taskManager.getTaskById(taskId1); //7
-        taskManager.getTaskById(taskId1); //8
-        taskManager.getTaskById(taskId2); //9
-        taskManager.getTaskById(taskId1); //10
-        taskManager.getTaskById(taskId2); //11
-        taskManager.getTaskById(taskId3); //12
-
-        for(Task task : historyManager.getHistory()){
-            System.out.print(task.getId() + " ");
+        for (Task task : historyManager.getHistory()) {
+            System.out.print(task.getName() + " ");
         }
     }
 

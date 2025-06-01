@@ -1,14 +1,16 @@
-package Controller;
+package ru.yandex.controller;
 
-import Model.EpicTask;
-import Model.SubTask;
-import Model.Task;
-import Model.TaskType;
+import ru.yandex.model.EpicTask;
+import ru.yandex.model.SubTask;
+import ru.yandex.model.Task;
+import ru.yandex.model.TaskType;
 
 import java.util.ArrayList;
 
 public interface TaskManager {
     int addNewTask(Task task);
+
+    Task getAnyTaskById(int id);
 
     Task getTaskById(int id);
 
