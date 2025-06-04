@@ -13,7 +13,7 @@ import static java.nio.file.StandardCopyOption.*;
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final Path pathToFile;
     private final String fileName;
-    private final int DELETE_FLAG = -1;
+    private final int flagToDelete = -1;
 
     public FileBackedTaskManager(String fileName) {
         super();
@@ -52,7 +52,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public void removeTaskById(int id) {
         super.removeTaskById(id);
         Map.of(id, -1);
-        saveChanges(Map.of(id, DELETE_FLAG), OperationType.REMOVE);
+        saveChanges(Map.of(id, flagToDelete), OperationType.REMOVE);
     }
 
     @Override
@@ -60,10 +60,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         ArrayList<Integer> epicSubTasks = getEpicTaskById(epicTaskId).getSubTasks();
         super.removeEpicTask(epicTaskId);
 
-        HashMap<Integer,Integer> valuesToRemove = new HashMap<>();
-        valuesToRemove.put(epicTaskId, DELETE_FLAG);
+        HashMap<Integer, Integer> valuesToRemove = new HashMap<>();
+        valuesToRemove.put(epicTaskId, flagToDelete);
         for (Integer subTaskId : epicSubTasks) {
-            valuesToRemove.put(subTaskId, DELETE_FLAG);
+            valuesToRemove.put(subTaskId, flagToDelete);
         }
         saveChanges(valuesToRemove, OperationType.REMOVE);
     }
@@ -73,7 +73,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         int epicSubTaskId = getSubTaskById(subTaskId).getEpicTaskId();
         super.removeSubTask(subTaskId, isDeletingEpicTasks);
         if (!isDeletingEpicTasks) {
-            saveChanges(Map.of(subTaskId, DELETE_FLAG), OperationType.REMOVE);
+            saveChanges(Map.of(subTaskId, flagToDelete), OperationType.REMOVE);
             saveChanges(Map.of(epicSubTaskId, epicSubTaskId), OperationType.UPDATE);
         }
     }
@@ -82,7 +82,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public void removeAllTasks() {
         HashMap<Integer, Integer> mapToRemove = new HashMap<>();
         for (int taskId : tasks.keySet()) {
-            mapToRemove.put(taskId, DELETE_FLAG);
+            mapToRemove.put(taskId, flagToDelete);
         }
         saveChanges(mapToRemove, OperationType.REMOVE);
     }
@@ -142,7 +142,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 Integer taskId = getIdFromTaskString(line);
                 if (oldIdToNewIDMap.containsKey(taskId)) {
                     Integer newTaskId = oldIdToNewIDMap.get(taskId);
-                    if (newTaskId != DELETE_FLAG) {
+                    if (newTaskId != flagToDelete) {
                         String newTaskString = getAnyTaskById(newTaskId).toString();
                         writer.write(newTaskString + "\n");
                     }
