@@ -7,11 +7,8 @@ import ru.yandex.model.SubTask;
 import ru.yandex.model.Task;
 import ru.yandex.model.TaskStatus;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileStore;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Main {
