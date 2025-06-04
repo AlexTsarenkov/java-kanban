@@ -51,13 +51,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Model.Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                ", taskType=" + taskType +
-                '}';
+        return String.format("type:%s; id:%d; name:%s; description:%s", taskType, id, name, description);
     }
 
     public void setStatus(TaskStatus status) {

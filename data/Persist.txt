@@ -1,0 +1,4 @@
+type:TASK; id:1; name:Task1; description:Task 1 for test
+type:TASK; id:2; name:Task2; description:Task 2 for test
+type:EPIC_TASK; id:3; name:Task1; description:Task 1 for test; subIDs:[4]
+type:SUB_TASK; id:4; name:Task2; description:Task 2 for test; epicId:3

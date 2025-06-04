@@ -17,20 +17,20 @@ public class EpicTask extends Task {
         taskType = TaskType.EPIC_TASK;
     }
 
+    public EpicTask(int id, String name, String description, ArrayList<Integer> subTasks) {
+        super(name, description, id);
+        this.subTasks = subTasks;
+        taskType = TaskType.EPIC_TASK;
+    }
+
     @Override
     public String toString() {
-        return "Model.EpicTask{" +
-                "subTasks=" + subTasks +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                ", taskType=" + taskType +
-                '}';
+        return  String.format("type:%s; id:%d; name:%s; description:%s; subIDs:",
+                taskType, id, name, description) +  subTasks.toString();
     }
 
     public ArrayList<Integer> getSubTasks() {
-        return subTasks;
+        return new ArrayList<Integer>(subTasks);
     }
 
     public void addSubTask(Integer subTaskId) {

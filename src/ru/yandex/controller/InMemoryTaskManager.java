@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InMemoryTaskManager implements TaskManager {
-    private int currentTaskId;
-    private final HashMap<Integer, Task> tasks;
-    private final HashMap<Integer, EpicTask> epicTasks;
-    private final HashMap<Integer, SubTask> subTasks;
+    protected int currentTaskId;
+    protected final HashMap<Integer, Task> tasks;
+    protected final HashMap<Integer, EpicTask> epicTasks;
+    protected final HashMap<Integer, SubTask> subTasks;
     private final HistoryManager historyManager;
 
     public InMemoryTaskManager() {
@@ -113,7 +113,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         //If it was SUBTASK need to recalc EPIC status
         if (subTasks.containsKey(id)) {
-            removeSubTask(id);
+            removeSubTask(id, false);
         }
 
     }
@@ -227,7 +227,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void removeAllSubTasks() {
         if (!subTasks.isEmpty()) {
             for (SubTask subTask : subTasks.values()) {
-                removeSubTask(subTask.getId());
+                removeSubTask(subTask.getId(), false);
             }
         }
     }
@@ -292,28 +292,29 @@ public class InMemoryTaskManager implements TaskManager {
         epicTask.setStatus(status);
     }
 
-    private void removeEpicTask(int epicTaskId) {
+    protected void removeEpicTask(int epicTaskId) {
         //If it was EPIC need to remove all SUBTASKS
         EpicTask epicTask = epicTasks.get(epicTaskId);
         ArrayList<Integer> epicSubTasks = epicTask.getSubTasks();
 
         if (!epicSubTasks.isEmpty()) {
             for (Integer subTaskId : epicSubTasks) {
-                subTasks.remove(subTaskId);
-                historyManager.remove(subTaskId);
+                removeSubTask(subTaskId, true);
             }
         }
         epicTasks.remove(epicTaskId);
         historyManager.remove(epicTaskId);
     }
 
-    private void removeSubTask(int subTaskId) {
+    protected void removeSubTask(int subTaskId, boolean isDeletingEpicTask) {
         SubTask subTask = subTasks.get(subTaskId);
         EpicTask epicTask = epicTasks.get(subTask.getEpicTaskId());
         epicTask.removeSubTask(subTaskId);
         subTasks.remove(subTaskId);
         historyManager.remove(subTaskId);
-        calculateEpicTaskStatus(epicTask);
+        if (!isDeletingEpicTask) {
+            calculateEpicTaskStatus(epicTask);
+        }
     }
 
     private int getNewTaskId() {
