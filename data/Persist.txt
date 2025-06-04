@@ -1,4 +1,12 @@
-type:TASK; id:1; name:Task1; description:Task 1 for test
-type:TASK; id:2; name:Task2; description:Task 2 for test
+type:EPIC_TASK; id:1; name:Task1; description:Task 1 for test; subIDs:[2]
+type:SUB_TASK; id:2; name:Task2; description:Task 2 for test; epicId:1
 type:EPIC_TASK; id:3; name:Task1; description:Task 1 for test; subIDs:[4]
 type:SUB_TASK; id:4; name:Task2; description:Task 2 for test; epicId:3
+type:EPIC_TASK; id:1; name:Task1; description:Task 1 for test; subIDs:[2]
+type:SUB_TASK; id:2; name:Task2; description:Task 2 for test; epicId:1
+type:EPIC_TASK; id:5; name:Task1; description:Task 1 for test; subIDs:[6]
+type:SUB_TASK; id:6; name:Task2; description:Task 2 for test; epicId:5
+type:EPIC_TASK; id:7; name:Task1; description:Task 1 for test; subIDs:[8]
+type:SUB_TASK; id:8; name:Task2; description:Task 2 for test; epicId:7
+type:EPIC_TASK; id:9; name:Task1; description:Task 1 for test; subIDs:[10]
+type:SUB_TASK; id:10; name:Task2; description:Task 2 for test; epicId:9

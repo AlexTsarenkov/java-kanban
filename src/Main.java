@@ -101,20 +101,19 @@ public class Main {
 
         System.out.println("Test 10: Load from file test");
         Path persistPath = Path.of(System.getProperty("user.dir"), "data", "Persist.txt");
-        FileBackedTaskManager fileBackedTaskManagerPersist = new FileBackedTaskManager(persistPath.toString());
+
         try {
-            fileBackedTaskManagerPersist.loadFromFile(persistPath.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            FileBackedTaskManager fmPersist = FileBackedTaskManager.loadFromFile(persistPath.toString());
+            printTasks(fmPersist);
+
+            int pid1 = fmPersist.addNewTask(new Task("Task1", "Task 1 for test", 0));
+            int pid2 = fmPersist.addNewTask(new Task("Task2", "Task 2 for test", 0));
+            fmPersist.taskAddSubTask(pid1, pid2);
+
+            printTasks(fmPersist);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-
-        printTasks(fileBackedTaskManagerPersist);
-
-        int pid1 = fileBackedTaskManagerPersist.addNewTask(new Task("Task1", "Task 1 for test", 0));
-        int pid2 = fileBackedTaskManagerPersist.addNewTask(new Task("Task2", "Task 2 for test", 0));
-        fileBackedTaskManagerPersist.taskAddSubTask(pid1, pid2);
-
-        printTasks(fileBackedTaskManagerPersist);
     }
 
     public static void printTasks(TaskManager taskManager) {

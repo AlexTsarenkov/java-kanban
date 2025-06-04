@@ -1,4 +1,4 @@
-package ru.yandex.model;
+package ru.yandex.utils;
 
 public enum OperationType {
     ADD,

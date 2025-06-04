@@ -1,6 +1,8 @@
 package ru.yandex.controller;
 
+import ru.yandex.exceptions.ManagerSaveException;
 import ru.yandex.model.*;
+import ru.yandex.utils.OperationType;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,16 +23,43 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         pathToFile = Paths.get(fileName);
     }
 
-    public void loadFromFile(String fileName) throws IOException {
+    public static FileBackedTaskManager loadFromFile(String fileName) throws IOException {
+        FileBackedTaskManager fm = new FileBackedTaskManager(fileName);
         Path path = Paths.get(fileName);
         if (Files.exists(path)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(path.toString()))) {
                 while (reader.ready()) {
                     String line = reader.readLine();
-                    createTaskFromString(line);
+                    Task task = createTaskFromString(line);
+                    if (task != null) {
+                        addTaskDirectlyToFileBasedManager(task, fm);
+                    }
                 }
             }
         }
+        return fm;
+    }
+
+    public void addTaskDirectly(Task task) {
+        if (task.getId() > currentTaskId) {
+            currentTaskId = task.getId();
+
+            switch (task.getTaskType()) {
+                case TASK:
+                    tasks.put(task.getId(), task);
+                    break;
+                case EPIC_TASK:
+                    epicTasks.put(task.getId(), (EpicTask) task);
+                    break;
+                case SUB_TASK:
+                    subTasks.put(task.getId(), (SubTask) task);
+                    break;
+            }
+        }
+    }
+
+    private static void addTaskDirectlyToFileBasedManager(Task task, FileBackedTaskManager manager) {
+        manager.addTaskDirectly(task);
     }
 
     public void refreshFile() throws IOException {
@@ -166,7 +195,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return Integer.parseInt(taskString.substring(taskString.indexOf("id:") + 3, taskString.indexOf("name") - 2));
     }
 
-    private void createTaskFromString(String taskString) {
+    private static Task createTaskFromString(String taskString) {
         String[] fields = taskString.split(";");
 
         int id = 0;
@@ -206,21 +235,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
         switch (taskType) {
             case TASK:
-                Task task = new Task(name, description, id);
-                tasks.put(id, task);
-                break;
+                return new Task(name, description, id);
             case SUB_TASK:
-                SubTask subTask = new SubTask(id, epicTaskId, name, description);
-                subTasks.put(id, subTask);
-                break;
+                return new SubTask(id, epicTaskId, name, description);
             case EPIC_TASK:
-                EpicTask epicTask = new EpicTask(id, name, description, subIDs);
-                epicTasks.put(id, epicTask);
-                break;
+                return new EpicTask(id, name, description, subIDs);
         }
-        if (id > currentTaskId) {
-            currentTaskId = id;
-        }
-
+        return null;
     }
 }
