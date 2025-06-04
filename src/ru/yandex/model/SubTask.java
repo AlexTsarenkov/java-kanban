@@ -1,7 +1,5 @@
 package ru.yandex.model;
 
-import java.util.ArrayList;
-
 public class SubTask extends Task {
     private int epicTaskId;
 

@@ -14,8 +14,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class FileBackedTaskManagerTest {
     File tmpFile = null;
     Path pathToTmp = null;
