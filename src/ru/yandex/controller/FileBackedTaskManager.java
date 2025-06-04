@@ -13,7 +13,7 @@ import static java.nio.file.StandardCopyOption.*;
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final Path pathToFile;
     private final String fileName;
-    private final static int DELETE_FLAG = -1;
+    private final int DELETE_FLAG = -1;
 
     public FileBackedTaskManager(String fileName) {
         super();
